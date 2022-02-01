@@ -97,3 +97,59 @@ myHeadPM [] = error "Can't call myheadPM on an empty list"
 myHeadPM (x:_) = x
 -- since we only care about the first value in the list we use the underscore to match the tail
 
+-- any time we want to bind more than one var even if one is a wildcard (_) 
+    -- we need to surround them in ()
+-- notice the (error) function that takes a string and generates a runtime error
+    -- we can use that string as info for what kind of error occurred
+    -- it causes a program crash fyi
+    -- use it wisely
+
+-- here is an example of multiple pattern matching 
+-- this will use the Show typeclass to take the (a) type input and show it as a String
+tell :: (Show a) => [a] -> String
+tell [] = "This list is empty" -- empty list
+tell (x:[]) = "The list has one element: " ++ show x -- list of length 1
+tell (x:y:[]) = "This list has two elements: " ++ show x ++ " and " ++ show y -- list of length 2
+tell (x:y:_) = "This list is long. The first two elements are: " ++ show x ++ " and " ++ show y -- long list
+
+-- this is a safe function since it accounts for all sizes of a list
+    -- empty []
+    -- length 1 (x:[])
+    -- length 2 (x:y:[])
+    -- anything longer (x:y:[])
+        -- if we only needed the first value this would work (x:_)
+
+-- here is length with pattern matching and recursion
+length' :: (Num b) => [a] -> b 
+length' [] = 0
+length' (_:xs) = 1 + length' xs -- 1 is the first index then call function on the remainder
+
+-- define the result of the known input 
+    -- i.e. the empty list
+    -- then take the list apart in the second pattern
+        -- length is always 1 + the rest of the list
+-- length' "ham"
+    -- 1 + length' "am"
+    -- 1 + (1 + length' "m")
+    -- 1 + (1 + (length' ""))
+    -- 1 + (1 + (0))
+    -- 3
+
+-- lets try summing
+sum' :: (Num a) => [a] -> a 
+sum' [] = 0
+sum' (x:xs) = x + sum' xs
+-- here we do the same thing as length' but we need to know the x value
+
+-- in addition to pattern matching with (x:xs) syntax there is something called AS PATTERNS
+    -- these are used to break something up in accordance to a pattern 
+    -- then binding it to names while keeing a ref tothe whole thing
+    -- this is done with (@) in front of a pattern
+    -- For Example: xs@(x:y:ys) is the same as (x:y:ys) but you can get the whole list as xs
+capital :: String -> String
+capital "" = "Empty String"
+capital all@(x:xs) = "The first letter of " ++ all ++ " is " ++ [x]
+-- ghci> capital "Dracula"
+-- "The first letter of Dracula is D"
+
+
