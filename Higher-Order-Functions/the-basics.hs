@@ -1,0 +1,6 @@
+-- oof sounds scary.
+-- all these are functions that 
+    -- take a function as a parameter
+    -- return functions as return values
+-- if a function does either of the above then it is a HIGHER ORDER FUNCTION
+-- these are not a part of Haskell...They are Haskell
