@@ -7,17 +7,17 @@
 -- see below and in /forever-eg for example of piping output of file to terminal
 
 {-
-$ ghc --make forever   
-[1 of 1] Compiling Main             ( forever.hs, forever.o )  
-Linking forever ...  
+$ ghc --make capslocker   
+[1 of 1] Compiling Main             ( capslocker.hs, capslocker.o )  
+Linking capslocker ...  
 $ cat sample-text.txt  
 I'm a lil' teapot  
 What's with that airplane food, huh?  
 It's so small, tasteless  
-$ cat sample-text.txt | ./forever  
+$ cat sample-text.txt | ./capslocker  
 I'M A LIL' TEAPOT  
 WHAT'S WITH THAT AIRPLANE FOOD, HUH?  
 IT'S SO SMALL, TASTELESS  
-forever <stdin>: hGetLine: end of file 
+capslocker <stdin>: hGetLine: end of file 
 -}
 
